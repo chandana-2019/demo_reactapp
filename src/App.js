@@ -4,6 +4,8 @@ import { gql } from 'apollo-boost';
 import DBTable from './components/DBTable';
 import AccelometerChart from "./components/AccelometerChart"
 import ChartGyrotemp from './components/ChartGyrotemp';
+import TempCard from './components/TempCard';
+
 
 
 
@@ -36,7 +38,7 @@ export default class App extends Component {
       let result = await client.query({
         query: gql`
             {
-              getDeviceUplingData(dev_eui:"d9ad826ed6e99f58",limit:5){
+              getDeviceUplingData(dev_eui:"ce74b3a51b94c76b",limit:5){
                 received_at
                  dev_eui
                  device_name
@@ -75,6 +77,7 @@ export default class App extends Component {
   render() {
     let temps = []
     temps = this.state.chartdata.map(da => da.data.temp)
+    console.log(temps);
     return (
 
 
@@ -88,28 +91,30 @@ export default class App extends Component {
             <DBTable rows={this.state.repos} />
           </div>
         </div>
-        <div className="Container">
-          <div className="row">
 
-            <div className="col-lg-4" id="temp">
-              <br></br>
-              <br></br>
-              <h5 align="center"><b>Temperature now is : {temps[0]}&#8451;</b></h5>
-            </div>
+        <div className="row">
 
-            <div className="col-lg-4">
-              <ChartGyrotemp chartvalue={this.state.chartdata} title={"Time"} color="#70CAD1" />
-            </div>
-
-            <div className="col-lg-4" id="acc">
-              <AccelometerChart chartvalue={this.state.chartdata} title={"Time"} color="#70CAD1" />
-            </div>
+          <div className="col-lg-3" id="temptext">
 
 
+            <TempCard tempvalue={this.state.chartdata.map(da => da.data.temp)} />
 
 
           </div>
+
+          <div className="col-lg-4">
+            <ChartGyrotemp chartvalue={this.state.chartdata} title={"Time"} color="#70CAD1" />
+          </div>
+
+          <div className="col-lg-4" id="acc">
+            <AccelometerChart chartvalue={this.state.chartdata} title={"Time"} color="#70CAD1" />
+          </div>
+
+
+
+
         </div>
+
       </React.Fragment>
 
 

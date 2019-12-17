@@ -37,19 +37,19 @@ class Accelometer_Chart extends Component {
           {
             label: 'Accelometer Y',
             data: this.props.chartvalue.map(d => d.data.AY),
-            backgroundColor: "#cc7ede",
+            backgroundColor: "#64bd80",
             fill: false,
             borderCapStyle: 'butt',
-            borderColor: "#cc7ede",
+            borderColor: "#64bd80",
             lineTension: 0.5,
           },
           {
             label: 'Accelometer Z',
             data: this.props.chartvalue.map(d => d.data.AZ),
-            backgroundColor: "#cc7e10",
+            backgroundColor: "#4a48b0",
             fill: false,
             borderCapStyle: 'butt',
-            borderColor: "#cc7e10",
+            borderColor: "#4a48b0",
             lineTension: 0.5,
           }]
       },
@@ -70,7 +70,7 @@ class Accelometer_Chart extends Component {
     return (
 
       <div class="container">
-        <h4 align="center"> Accelerometer data : </h4>
+        <h4 align="center"> Accelerometer  </h4>
         <br></br>
         <canvas ref={this.chartRef} />
 

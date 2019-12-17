@@ -62,24 +62,19 @@ main {
   margin-left:10px ;
   margin-right:10px ;
 }
-/* .half1{
 
-width: auto;
-height: auto;
- margin: auto;
-} */
-.half2 {
-float: left;
-width: 50%;
-height:50%;
-margin: auto;
 
-}
+
 #temp {
   float: left;
   width: 400px;
   height:200px;
- margin: auto;
+  margin-left: 10px;
+  margin-top: 5px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  position : absolute;
  
   }
   .acc {
@@ -97,27 +92,16 @@ margin: auto;
       margin-right: 10px;
       margin-bottom: 10px;
     } */
-.child1 {
-width: 50%;
-margin-top: 20px;
-margin-bottom: 120px;
-}
-.child2 {
-width: 50%;
-margin-top: 120px;
-margin-bottom: 120px;
-}
 
-.first-child {
-float: left;
-width: 700px;
-background:#DCDCDC;
-}
-.last-child {
-float: right;
-width: 700px;
-background:#DCDCDC;
-}
+  .temptext {
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+    margin-right:-5px ;
+    }
+
+
+
 .canvas.chartjs-size-monitor{
 height: 50%;
 width: 40%;
@@ -157,6 +141,9 @@ width: 50%;
 box-sizing: border-box;
 */
 }
+/* #temp{
+  margin-left: 10px;
+} */
 
 
 

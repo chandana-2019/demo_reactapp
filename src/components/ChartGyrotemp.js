@@ -60,7 +60,7 @@ class Chart_Gyrotemp extends Component {
   render() {
     return (
       <div class="container">
-        <h4 align="center"> Gyroscope data : </h4>
+        <h4 align="center"> Gyroscope  </h4>
         <br></br>
         <canvas ref={this.chartRef} />
 
