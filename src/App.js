@@ -4,11 +4,10 @@ import { gql } from 'apollo-boost';
 import DBTable from './components/DBTable';
 import AccelometerChart from "./components/AccelometerChart"
 import ChartGyrotemp from './components/ChartGyrotemp';
-import GaugeChart from 'react-gauge-chart';
 
-import RadialGauge from 'react-canvas-gauges/dist/RadialGauge.js'
-import Dashboard from './templates/Dashboard';
-//import ButtonAppBar from "./menu"
+
+
+
 
 
 import './App.css';
@@ -93,7 +92,9 @@ export default class App extends Component {
           <div className="row">
 
             <div className="col-lg-4" id="temp">
-              <h4><b>Temperature now is :{temps[4]}&#8451;</b></h4>
+              <br></br>
+              <br></br>
+              <h5 align="center"><b>Temperature now is : {temps[0]}&#8451;</b></h5>
             </div>
 
             <div className="col-lg-4">

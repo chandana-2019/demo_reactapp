@@ -43,7 +43,12 @@
 * {
   margin: 0; padding: 0;
 }
-html, body, #container {
+html, body {
+  height: 100%;
+}
+
+#container {
+  margin-top: 50px;
   height: 100%;
 }
 header {
@@ -75,6 +80,7 @@ margin: auto;
   width: 400px;
   height:200px;
  margin: auto;
+ 
   }
   .acc {
     float: right;
@@ -128,6 +134,9 @@ margin-bottom: 10px; */
 }
 .container {
 width: 100%;
+margin-top: 50px;
+margin-left:2px ;
+margin-right:2px ;
 }
 
 .canvas {

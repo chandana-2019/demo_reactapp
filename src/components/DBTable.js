@@ -31,6 +31,7 @@ const StyledTableRow = withStyles(theme => ({
 const useStyles = makeStyles({
   root: {
     width: '100%',
+
   },
   tableWrapper: {
     maxHeight: '50%',

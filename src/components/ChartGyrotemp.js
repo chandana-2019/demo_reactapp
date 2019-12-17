@@ -28,14 +28,18 @@ class Chart_Gyrotemp extends Component {
             label: 'Gyro X',
             data: this.props.chartvalue.map(d => d.data.GX),
             backgroundColor: "#2a37c7",
-            //fill: false,
+            fill: false,
+            borderCapStyle: 'butt',
+            borderColor: "#2a37c7",
             lineTension: 0.5,
           },
           {
             label: 'Gyro Y',
             data: this.props.chartvalue.map(d => d.data.GY),
             backgroundColor: "#1db340",
-            //fill: false,
+            fill: false,
+            borderCapStyle: 'butt',
+            borderColor: "#1db340",
             lineTension: 0.5,
           },
         ]
@@ -56,9 +60,10 @@ class Chart_Gyrotemp extends Component {
   render() {
     return (
       <div class="container">
+        <h4 align="center"> Gyroscope data : </h4>
         <br></br>
-        <h4> Gyroscope data : </h4>
         <canvas ref={this.chartRef} />
+
       </div>
     )
   }
