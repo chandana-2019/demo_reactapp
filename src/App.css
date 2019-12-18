@@ -68,9 +68,9 @@ main {
 #temp {
   float: left;
   width: 400px;
-  height:200px;
+  height:150px;
   margin-left: 10px;
-  margin-top: 5px;
+  margin-top: 2px;
   align-items: center;
   justify-content: center;
   display: flex;
@@ -96,7 +96,7 @@ main {
   .temptext {
     align-items: center;
     justify-content: center;
-    margin-top: 30px;
+    margin-top: 5px;
     margin-right:-5px ;
     }
 
@@ -118,8 +118,8 @@ margin-bottom: 10px; */
 }
 .container {
 width: 100%;
-margin-top: 50px;
-margin-left:2px ;
+margin-top: 40px;
+margin-left:0px ;
 margin-right:2px ;
 }
 

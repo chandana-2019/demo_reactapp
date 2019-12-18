@@ -7,12 +7,12 @@ import Typography from '@material-ui/core/Typography';
 const useStyles = makeStyles({
     card: {
         minWidth: 275,
-        width: 400,
+        width: 350,
         height: 200,
-        marginTop: 130,
+        marginTop: 80,
         marginBottom: 10,
-        marginleft: 20,
-        paddingLeft: 10,
+        marginleft: 30,
+        paddingLeft: 70,
         marginRight: 20
     },
 
@@ -29,17 +29,18 @@ export default function SimpleCard(props) {
 
 
     return (
-        <Card className={classes.card}>
-            <CardContent>
-                <Typography className={classes.title} color="textSecondary" gutterBottom>
-                    <h4 align="center"> Temperature </h4>
-                </Typography>
-                <br></br>
-                <Typography variant="body3" component="p">
-                    <h4 align="center"><b> {props.tempvalue[0]}&#8451;</b></h4>
-                </Typography>
-            </CardContent>
+        <div class="container">
 
-        </Card>
+            <h4 align="center">Temperature </h4>
+
+            <Card className={classes.card}>
+                <CardContent align-items="center">
+                    <Typography >
+                        <h4 align="center"><b> {props.tempvalue[4]}&#8451;</b></h4>
+                    </Typography>
+                </CardContent>
+
+            </Card>
+        </div>
     );
 }

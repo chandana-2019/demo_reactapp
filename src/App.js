@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import ApolloClient from 'apollo-boost';
 import { gql } from 'apollo-boost';
-import DBTable from './components/DBTable';
+//import DBTable from './components/DBTable';
+import SelectformTable from './components/SelectformTable';
 import AccelometerChart from "./components/AccelometerChart"
 import ChartGyrotemp from './components/ChartGyrotemp';
 import TempCard from './components/TempCard';
-
+import TestSelectable from './components/TestSelectable';
 
 
 
@@ -48,7 +49,7 @@ export default class App extends Component {
                    temp
                    GX
                    GY
-                   GX
+                   GZ
                    AX
                    AY
                    AZ
@@ -56,19 +57,42 @@ export default class App extends Component {
                }
                          }`
       })
+
+
+
       this.setState({
+
         repos: result.data.getDeviceUplingData,
         chartdata: result.data.getDeviceUplingData,
 
 
       })
-      console.log('lets check data inside chartdata');
+      console.log('data at repos');
+      console.log(this.state.repos);
+      console.log(' check type of time data ');
+      console.log(typeof this.state.repos[0].data.time);
+      if (this.state.repos[0].data.time == null) {
+        console.log(' the time is null ');
+      }
+      else {
+        console.log(' the time is fine ');
+      }
+      /* if (this.state.repos[0].data[0].time == null) {
+         console.log(' the time is null ,dont proceed now ');
+         console.log(typeof this.state.repos[0].data[0].time);
+       }
+       */
+
+      console.log(' check data ');
       console.table(this.state.chartdata[0].data);
-      console.table(JSON.stringify(this.state.chartdata[0]));
+
+
+
 
 
 
     } catch (err) {
+      console.log('Something is not right, Probaly no data sent');
       console.error(err);
     }
   }
@@ -88,16 +112,16 @@ export default class App extends Component {
           <div className="col-md-12">
 
 
-            <DBTable rows={this.state.repos} />
+            <SelectformTable rows={this.state.repos} />
           </div>
         </div>
 
         <div className="row">
 
-          <div className="col-lg-3" id="temptext">
+          <div className="col-lg-4" id="temptext">
 
 
-            <TempCard tempvalue={this.state.chartdata.map(da => da.data.temp)} />
+            <TempCard align-items="center" tempvalue={this.state.chartdata.map(da => da.data.temp)} />
 
 
           </div>
