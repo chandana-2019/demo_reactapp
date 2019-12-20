@@ -8,7 +8,6 @@ import TableRow from '@material-ui/core/TableRow';
 //merge the matrial UI select form inside DBtable 
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
@@ -60,12 +59,19 @@ export default function CustomizedTables(props) {
     const classes = useStyles();
     const [dev_eui, setAge] = React.useState('');
 
-    const inputLabel = React.useRef(null);
+    //const inputLabel = React.useRef(null);
     const handleChange = event => {
         setAge(event.target.value);
     };
 
+
     return (
+        /*
+         console.log('props at db table is ' + props),
+         console.table(props),
+        */
+
+
         <div className={classes.tableWrapper}>
 
             <Table className={classes.table} aria-label="customized table">
@@ -110,22 +116,83 @@ export default function CustomizedTables(props) {
                             </div>
                         </StyledTableCell>
 
-                        <StyledTableCell align="center">Received at</StyledTableCell>
-                        <StyledTableCell align="center">Data&nbsp;</StyledTableCell>
+                        <StyledTableCell align="center"><b>Received at</b></StyledTableCell>
+                        <StyledTableCell align="center"><b>Data&nbsp;</b></StyledTableCell>
+                        <StyledTableCell align="center"><b>Device Data</b></StyledTableCell>
 
                     </TableRow>
                 </TableHead>
+
+
+
+
                 <TableBody>
-                    {props.rows.map(row => (
-                        <StyledTableRow key={row.dev_eui}>
-                            <StyledTableCell component="th" scope="row" align="center">  {row.device_name}           </StyledTableCell>
-                            <StyledTableCell align="center">               {row.dev_eui}             </StyledTableCell>
-                            <StyledTableCell align="center">               {row.received_at.split(' ').slice(0, 5).join(' ')}           </StyledTableCell>
-                            <StyledTableCell align="left">               {JSON.stringify(row.data)}  </StyledTableCell>
-                        </StyledTableRow>
-                    ))}
+                    {
+                        props.rows.map(row => row.data.time !== "null" ? (
+                            //console.table('sensor  Data  is '),
+                            //console.table('sensor  TIME is ' + row.data.time),
+
+
+
+                            <StyledTableRow key={row.dev_eui} >
+
+                                <StyledTableCell component="th" scope="row" align="center"> {row.device_name}           </StyledTableCell>
+                                <StyledTableCell align="center"> {row.dev_eui} </StyledTableCell>
+                                <StyledTableCell align="center"> {row.received_at.split(' ').slice(0, 5).join(' ')} </StyledTableCell>
+                                <StyledTableCell align="left"> {JSON.stringify(row.data)} </StyledTableCell>
+
+                                <StyledTableCell alignContents="center">
+
+                                    <li> Device Time : {row.data.time} </li>
+                                    <li>Temp:  {row.data.temp}  </li>
+                                    <li> GX :  {row.data.GX} </li>
+                                    <li> GY :   {row.data.GY}  </li>
+                                    <li> GZ :    {row.data.GZ} </li>
+                                    <li> AX : {row.data.AX}  </li>
+                                    <li> AY : {row.data.AY}  </li>
+                                    <li> AZ :  {row.data.AZ}  </li>
+                                    <li>__typename : {row.data.__typename}  </li>
+                                </StyledTableCell>
+                            </StyledTableRow>
+                        ) : (
+                                <StyledTableRow key={row.dev_eui} >
+
+                                    <StyledTableCell component="th" scope="row" align="center"> {row.device_name}           </StyledTableCell>
+                                    <StyledTableCell align="center"> {row.dev_eui} </StyledTableCell>
+                                    <StyledTableCell align="center"> {row.received_at} </StyledTableCell>
+                                    <StyledTableCell align="left"> {JSON.stringify(row.data)} </StyledTableCell>
+
+                                    <StyledTableCell alignContents="center">
+
+                                        <li> Device Time :  Device Time is null </li>
+                                        <li>Temp:  null  </li>
+                                        <li> GX : null </li>
+                                        <li> GY : null  </li>
+                                        <li> GZ : null </li>
+                                        <li> AX :null  </li>
+                                        <li> AY : null  </li>
+                                        <li> AZ : null </li>
+                                        <li>__typename : {row.data.__typename}  </li>
+                                    </StyledTableCell>
+                                </StyledTableRow>
+
+                            )
+
+
+
+
+
+
+                        )
+                    }
+
+
                 </TableBody>
+
+
             </Table>
+
         </div>
-    );
+    )
+
 }

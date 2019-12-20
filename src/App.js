@@ -6,7 +6,7 @@ import SelectformTable from './components/SelectformTable';
 import AccelometerChart from "./components/AccelometerChart"
 import ChartGyrotemp from './components/ChartGyrotemp';
 import TempCard from './components/TempCard';
-import TestSelectable from './components/TestSelectable';
+//import TestSelectable from './components/TestSelectable';
 
 
 
@@ -81,12 +81,12 @@ export default class App extends Component {
          console.log(' the time is null ,dont proceed now ');
          console.log(typeof this.state.repos[0].data[0].time);
        }
-       */
+       
 
       console.log(' check data ');
       console.table(this.state.chartdata[0].data);
 
-
+*/
 
 
 
@@ -99,9 +99,19 @@ export default class App extends Component {
 
 
   render() {
+    console.log(' check repos ,later map it  ');
+    console.log(this.state.repos);
+
+    /*
+    props.rows.map(row => (
+    if(this.props.schema.collectionName.length < 0)
+      if (props.rows[0].data.time == null)
+
+      */
+
     let temps = []
     temps = this.state.chartdata.map(da => da.data.temp)
-    console.log(temps);
+    //console.log(temps);
     return (
 
 
@@ -110,6 +120,7 @@ export default class App extends Component {
         <div className="row">
 
           <div className="col-md-12">
+
 
 
             <SelectformTable rows={this.state.repos} />
@@ -139,11 +150,13 @@ export default class App extends Component {
 
         </div>
 
+
       </React.Fragment>
 
 
 
     )
+
   }
 }
 
