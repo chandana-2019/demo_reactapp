@@ -2,6 +2,30 @@ import React, { Component } from 'react';
 
 import Chart from 'chart.js';
 
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+
+const useStyles = makeStyles({
+  card: {
+    minWidth: 275,
+    width: 350,
+    height: 200,
+    marginTop: 80,
+    marginBottom: 10,
+    marginleft: 30,
+    //paddingLeft: 30,
+    marginRight: 20,
+    alignContent: "center"
+  },
+
+  title: {
+    fontSize: 13,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+});
 
 class Accelometer_Chart extends Component {
 
@@ -126,10 +150,14 @@ class Accelometer_Chart extends Component {
     return (
 
       <div class="container">
-        <h4 align="center"> Accelerometer  </h4>
-        <br></br>
-        <canvas ref={this.chartRef} />
 
+        <Card className={useStyles.card}>
+          <CardContent align-items="center">
+            <h4 align="center"> Accelerometer  </h4>
+            <br></br>
+            <canvas ref={this.chartRef} />
+          </CardContent>
+        </Card>
       </div>
 
     )

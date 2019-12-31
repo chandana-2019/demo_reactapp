@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ApolloClient from 'apollo-boost';
 import { gql } from 'apollo-boost';
+import { useQuery } from '@apollo/react-hooks';
 //import DBTable from './components/DBTable';
 import SelectformTable from './components/SelectformTable';
 import AccelometerChart from "./components/AccelometerChart"
@@ -60,6 +61,27 @@ export default class App extends Component {
 
 
 
+      //try using hook 
+      function Dogs({ onDogSelected }) {
+        const { loading, error, data } = useQuery(result);
+
+        if (loading) return 'Loading...';
+        if (error) return `Error! ${error.message}`;
+
+        return (
+
+          <form>
+            <select name="dog" onChange={onDogSelected}>
+              {data.getDeviceUplingData.map(dog => (
+                <option key={dog.dev_eui} value={dog.device_name}>
+                  {dog.device_name}
+                </option>
+              ))}
+            </select>
+          </form>
+        );
+      }
+
       this.setState({
 
         repos: result.data.getDeviceUplingData,
@@ -67,6 +89,8 @@ export default class App extends Component {
 
 
       })
+      console.log("below is the typeof device eui :" + this.state.repos[0].dev_eui);
+      console.log(typeof this.state.repos[0].dev_eui);
       console.log('data at repos');
       console.log(this.state.repos);
       console.log(' check type of time data ');
@@ -120,16 +144,19 @@ export default class App extends Component {
         <div className="row">
 
           <div className="col-md-12">
-
-
-
             <SelectformTable rows={this.state.repos} />
           </div>
+
         </div>
 
         <div className="row">
 
-          <div className="col-lg-4" id="temptext">
+          <div className="col-lg-4">
+
+            <ChartGyrotemp chartvalue={this.state.chartdata} title={"Time"} color="#70CAD1" />
+          </div>
+
+          <div className="col-lg-4" >
 
 
             <TempCard align-items="center" tempvalue={this.state.chartdata.map(da => da.data.temp)} />
@@ -137,16 +164,11 @@ export default class App extends Component {
 
           </div>
 
-          <div className="col-lg-4">
-            <ChartGyrotemp chartvalue={this.state.chartdata} title={"Time"} color="#70CAD1" />
-          </div>
+
 
           <div className="col-lg-4" id="acc">
             <AccelometerChart chartvalue={this.state.chartdata} title={"Time"} color="#70CAD1" />
           </div>
-
-
-
 
         </div>
 

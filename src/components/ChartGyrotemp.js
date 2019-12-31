@@ -1,6 +1,31 @@
 import React, { Component } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 
 import Chart from 'chart.js';
+
+const useStyles = makeStyles({
+  card: {
+    minWidth: 275,
+    width: 350,
+    height: 200,
+    marginTop: 80,
+    marginBottom: 10,
+    marginleft: 30,
+    //paddingLeft: 30,
+    marginRight: 20,
+    alignContent: "center"
+  },
+
+  title: {
+    fontSize: 13,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+});
+
 
 
 class Chart_Gyrotemp extends Component {
@@ -8,11 +33,13 @@ class Chart_Gyrotemp extends Component {
 
   constructor(props) {
     super(props);
+
     /*console.log('props at Chart_Gyrotemp');
     console.log(props);
     */
     this.chartRef = React.createRef();
   }
+
 
   componentDidMount() {
     this.myChart = new Chart(this.chartRef.current, {
@@ -121,11 +148,17 @@ class Chart_Gyrotemp extends Component {
   render() {
     return (
       <div class="container">
-        <h4 align="center"> Gyroscope  </h4>
-        <br></br>
-        <canvas ref={this.chartRef} />
 
-      </div>
+        <Card className={useStyles.card}>
+          <CardContent align-items="center">
+            <h4 align="center"> Gyroscope  </h4>
+            <br></br>
+            <canvas ref={this.chartRef} />
+
+          </CardContent>
+        </Card>
+
+      </div >
     )
   }
 }
