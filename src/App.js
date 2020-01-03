@@ -2,28 +2,31 @@ import React, { Component } from 'react'
 import ApolloClient from 'apollo-boost';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
-//import DBTable from './components/DBTable';
+import DBTable from './components/DBTable';
 import SelectformTable from './components/SelectformTable';
 import AccelometerChart from "./components/AccelometerChart"
 import ChartGyrotemp from './components/ChartGyrotemp';
 import TempCard from './components/TempCard';
 //import TestSelectable from './components/TestSelectable';
-
-
-
-
-
-
 import './App.css';
 
+
+const client = new ApolloClient({ uri: 'https://azure-lora-api.azurewebsites.net/graphql?code=7aFl/fgJ3Iq0tXK8lqQbccX62yh91ETs0NvEoxscLgc/SC6WOWg3hA==', });
+
+
+
+
+
 export default class App extends Component {
+
+
   constructor() {
     super()
     this.DBquery = this.DBquery.bind(this);
     this.state = {
       repos: [],
       chartdata: [],
-      dateString: []
+      devlist: [],
 
     }
   }
@@ -37,10 +40,21 @@ export default class App extends Component {
   async DBquery() {
     const client = new ApolloClient({ uri: 'https://azure-lora-api.azurewebsites.net/graphql?code=7aFl/fgJ3Iq0tXK8lqQbccX62yh91ETs0NvEoxscLgc/SC6WOWg3hA==', });
     try {
-      let result = await client.query({
+      let result1 = await client.query({
+        query: gql`
+        {
+          getDeviceList{
+                      
+            dev_eui
+            device_name
+           }
+            }`
+
+      });
+      let result2 = await client.query({
         query: gql`
             {
-              getDeviceUplingData(dev_eui:"ce74b3a51b94c76b",limit:5){
+              getDeviceUplingData(dev_eui:"${result1.data.getDeviceList[0].dev_eui}",limit:5){
                 received_at
                  dev_eui
                  device_name
@@ -61,40 +75,27 @@ export default class App extends Component {
 
 
 
-      //try using hook 
-      function Dogs({ onDogSelected }) {
-        const { loading, error, data } = useQuery(result);
-
-        if (loading) return 'Loading...';
-        if (error) return `Error! ${error.message}`;
-
-        return (
-
-          <form>
-            <select name="dog" onChange={onDogSelected}>
-              {data.getDeviceUplingData.map(dog => (
-                <option key={dog.dev_eui} value={dog.device_name}>
-                  {dog.device_name}
-                </option>
-              ))}
-            </select>
-          </form>
-        );
-      }
-
       this.setState({
-
-        repos: result.data.getDeviceUplingData,
-        chartdata: result.data.getDeviceUplingData,
+        devlist: result1.data.getDeviceList,
+        repos: result2.data.getDeviceUplingData,
+        chartdata: result2.data.getDeviceUplingData,
 
 
       })
+      console.log("whats going on at query o/p:" + result1.data.getDeviceList.map(d => d.dev_eui));
+      console.log("selecting  lg cloud at query o/p:" + result1.data.getDeviceList[0].dev_eui);
+      //console.log("check the getDeviceList output:" + this.state.devlist.map(d => d.dev_eui));
+      // console.log("check the getDeviceList output:" + this.state.devlist.map(d => d.device_name));
+      console.table(this.state.devlist);
+      /*
+      console.log(typeof this.state.repos[0].dev_eui);
       console.log("below is the typeof device eui :" + this.state.repos[0].dev_eui);
       console.log(typeof this.state.repos[0].dev_eui);
       console.log('data at repos');
       console.log(this.state.repos);
       console.log(' check type of time data ');
       console.log(typeof this.state.repos[0].data.time);
+      */
       if (this.state.repos[0].data.time == null) {
         console.log(' the time is null ');
       }
@@ -123,8 +124,10 @@ export default class App extends Component {
 
 
   render() {
+    /*
     console.log(' check repos ,later map it  ');
     console.log(this.state.repos);
+    */
 
     /*
     props.rows.map(row => (
@@ -139,12 +142,15 @@ export default class App extends Component {
     return (
 
 
+
       <React.Fragment>
+
 
         <div className="row">
 
           <div className="col-md-12">
             <SelectformTable rows={this.state.repos} />
+            < DBTable rows={this.state.devlist} />
           </div>
 
         </div>

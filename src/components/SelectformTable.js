@@ -61,6 +61,7 @@ export default function CustomizedTables(props) {
 
     //const inputLabel = React.useRef(null);
     const handleChange = event => {
+        console.log('Selected value:', event.target.value);
         setAge(event.target.value);
     };
 

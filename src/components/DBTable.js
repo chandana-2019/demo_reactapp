@@ -39,7 +39,15 @@ const useStyles = makeStyles({
 });
 
 export default function CustomizedTables(props) {
+
+  const [, setOpt] = React.useState('');
   const classes = useStyles();
+
+  const handleChange = event => {
+    console.log('Selected value at DB table is :', event.target.value);
+    setOpt(event.target.value);
+  };
+
   return (
     <div className={classes.tableWrapper}>
 
@@ -49,19 +57,20 @@ export default function CustomizedTables(props) {
           <TableRow>
             <StyledTableCell>Device Name
             <form>
-                <select value={props.row}>
-                  <option value="ce74b3a51b94c76b">LG-cloud</option>
-                  <option value="b7c9e27d3035cdb">lg-connectivity-TEST</option>
-                  <option value="d9ad826ed6e99f58">LoRa-Node-webos</option>
+                <select value={props.rows.map(r => (r.dev_eui))}
+                  onChange={handleChange}>
+                  {props.rows.map(row => (
+                    <option value={row.dev_eui}>{row.device_name} </option>
+                  ))}
                 </select>
               </form>
             </StyledTableCell>
             <StyledTableCell align="center">Device EUI
             <form>
-                <select value={props.row}>
-                  <option value="ce74b3a51b94c76b">ce74b3a51b94c76b</option>
-                  <option value="b7c9e27d3035cdb">b7c9e27d3035cdb5</option>
-                  <option value="d9ad826ed6e99f58">d9ad826ed6e99f58</option>
+                <select value={props.rows.map(r => (r.dev_eui))} onChange={handleChange}>
+                  {props.rows.map(row => (
+                    <option value={row.dev_eui}>{row.dev_eui} </option>
+                  ))}
                 </select>
               </form>
             </StyledTableCell>
@@ -74,8 +83,7 @@ export default function CustomizedTables(props) {
             <StyledTableRow key={row.dev_eui}>
               <StyledTableCell component="th" scope="row">  {row.device_name}           </StyledTableCell>
               <StyledTableCell align="center">               {row.dev_eui}             </StyledTableCell>
-              <StyledTableCell align="center">               {row.received_at}           </StyledTableCell>
-              <StyledTableCell align="left">               {JSON.stringify(row.data)}  </StyledTableCell>
+
             </StyledTableRow>
           ))}
         </TableBody>
