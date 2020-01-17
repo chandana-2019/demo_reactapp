@@ -48,12 +48,12 @@ class Chart_Gyrotemp extends Component {
 
   componentDidUpdate() {
 
-    console.log('normal procedure at gyrochart');
+
     this.props.chartvalue.map(d => d.data.time !== "null" ? (
       this.myChart = new Chart(this.chartRef.current, {
         type: 'line',
         data: {
-          labels: this.props.chartvalue.map(d => d.data.time.split(' ').slice(4, 5).join(' ')),
+          labels: this.props.chartvalue.map(d => (new Date(parseInt(d.data.time * 1000))).toLocaleString()),//(new Date(parseInt(d.data.time))).toLocaleString()
           datasets: [
             {
               label: 'Gyro X',
@@ -85,6 +85,17 @@ class Chart_Gyrotemp extends Component {
           ]
         },
         options: {
+          scales: {
+            xAxes: [
+              {
+
+                ticks: {
+                  reverse: true,
+                },
+
+              }
+            ]
+          },
           fill: false,
           animation: {
             duration: 0
@@ -129,6 +140,17 @@ class Chart_Gyrotemp extends Component {
             ]
           },
           options: {
+            scales: {
+              xAxes: [
+                {
+
+                  ticks: {
+                    reverse: true,
+                  },
+
+                }
+              ]
+            },
             fill: false,
             animation: {
               duration: 0

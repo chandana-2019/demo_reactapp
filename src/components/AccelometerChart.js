@@ -49,7 +49,7 @@ class Accelometer_Chart extends Component {
   componentDidUpdate() {
 
 
-    console.log('normal procedure at Accelo chART');
+
     this.props.chartvalue.map(d => d.data.time !== "null" ? (
 
 
@@ -57,7 +57,7 @@ class Accelometer_Chart extends Component {
       this.myChart = new Chart(this.chartRef.current, {
         type: 'line',
         data: {
-          labels: this.props.chartvalue.map(d => d.data.time.split(' ').slice(4, 5).join(' ')),
+          labels: this.props.chartvalue.map(d => (new Date(parseInt(d.data.time * 1000))).toLocaleString()),//(new Date(parseInt(d.data.time))).toLocaleString()
           datasets: [
             {
 
@@ -89,18 +89,29 @@ class Accelometer_Chart extends Component {
             }]
         },
         options: {
-          fill: false,
+
+          scales: {
+            xAxes: [
+              {
+                ticks: {
+                  reverse: true,
+                },
+              }
+            ]
+          }
+          ,
           animation: {
             duration: 0
           }
         },
+        fill: false,
       }))
       :
       (
         this.myChart = new Chart(this.chartRef.current, {
           type: 'line',
           data: {
-            labels: this.props.chartvalue.map(d => d.data.time),
+            labels: this.props.chartvalue.map(d => (new Date(parseInt(d.data.time * 1000))).toLocaleString()),//(new Date(parseInt(d.data.time))).toLocaleString()
             datasets: [
               {
 
@@ -133,6 +144,15 @@ class Accelometer_Chart extends Component {
           },
           options: {
             fill: false,
+            scales: {
+              xAxes: [
+                {
+                  ticks: {
+                    reverse: true,
+                  },
+                }
+              ]
+            },
             animation: {
               duration: 0
             }
@@ -143,9 +163,6 @@ class Accelometer_Chart extends Component {
     )
   }
   //console.log("received data:", this.props);
-
-
-
 
 
   render() {

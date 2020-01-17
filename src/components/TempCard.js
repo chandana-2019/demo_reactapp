@@ -39,7 +39,6 @@ export default function SimpleCard(props) {
                     <h4 align="center">Temperature </h4>
                     <Typography class="temptext">
 
-
                         <h4 align="center"><b> {props.tempvalue[0]}&#8451;</b></h4>
 
                     </Typography>

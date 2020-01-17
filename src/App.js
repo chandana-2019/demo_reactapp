@@ -13,7 +13,6 @@ export default class App extends Component {
     this.DBquery = this.DBquery.bind(this);
     this.state = {
       devlist: [],
-      sel_value: '',
     }
   }
 
@@ -41,8 +40,7 @@ export default class App extends Component {
         devlist: result1.data.getDeviceList,
       })
       /*
-     console.log("check the getDeviceList output:" + this.state.devlist.map(d => d.dev_eui));
-      
+     
      // validate if  time is not null 
          if (this.state.repos[0].data.time == null) {
         console.log(' the time is null ');
@@ -53,7 +51,7 @@ export default class App extends Component {
       */
 
     } catch (err) {
-      console.log('Something is not right, Probaly no data sent');
+      // console.log('Something is not right, Probaly no data sent');
       console.error(err);
     }
   }
